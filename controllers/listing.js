@@ -92,7 +92,7 @@ module.exports.renderEditForm = async (req, res) => {
     return res.redirect("/listings"); // ensure only one response is sent
   }
   let originalImageUrl=listing.image.url;
-  originalImageUrl=originalImageUrl.replace("/upload/","/upload/w_250/")
+  originalImageUrl=originalImageUrl.replace("/upload/","/upload/w_250,c_fit/")
   console.log("Original URL:", listing.image?.url);
 
   res.render("listings/edit.ejs", { listing,originalImageUrl });
