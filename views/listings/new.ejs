@@ -49,11 +49,14 @@
         <div class="mb-3 col-md-4">
           <label for="category" class="form-label">Category</label>
           <select
-            name="listing[category]"
+            name="listing[category][]"
+            id="category"
             class="form-control"
+            multiple
+            size="6"
             required
           >
-            <option value="">Select a category</option>
+            <option value="Trending">Trending</option>
             <option value="Rooms">Rooms</option>
             <option value="Iconic Cities">Iconic Cities</option>
             <option value="Mountains">Mountains</option>
@@ -66,7 +69,8 @@
             <option value="Boat">Boat</option>
             <option value="Other">Other</option>
           </select>
-          <div class="invalid-feedback">Please select a category</div>
+          <small class="text-muted">Hold Ctrl/Cmd to select multiple categories.</small>
+          <div class="invalid-feedback">Please select at least one category</div>
         </div>
 
         <div class="mb-3 col-md-4">

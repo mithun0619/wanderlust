@@ -42,6 +42,12 @@ let response= await geocodingClient.forwardGeocode({
 })
   .send();
 
+  if (req.body.listing.category) {
+    req.body.listing.category = Array.isArray(req.body.listing.category)
+      ? req.body.listing.category
+      : [req.body.listing.category];
+  }
+
   let url = req.file.path;
   let filename = req.file.filename;
   const newListing = new Listing(req.body.listing);
@@ -69,6 +75,13 @@ module.exports.renderEditForm = async (req, res) => {
 
 module.exports.updateListing = async (req, res) => {
   let { id } = req.params;
+
+  if (req.body.listing.category) {
+    req.body.listing.category = Array.isArray(req.body.listing.category)
+      ? req.body.listing.category
+      : [req.body.listing.category];
+  }
+
   let listing = await Listing.findByIdAndUpdate(id, { ...req.body.listing });
 
   if (typeof req.file != "undefined") {

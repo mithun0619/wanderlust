@@ -121,3 +121,119 @@ footer {
   width: 80vh;
 }
 
+
+.wl-navbar {
+  height: auto;
+  background: linear-gradient(95deg, #ffffff 0%, #fff6f3 55%, #fffdfc 100%);
+  border-bottom: 1px solid #f3c7cf !important;
+  font-family: "Sora", "Segoe UI", sans-serif;
+  padding: 0.65rem 0;
+  box-shadow: 0 8px 24px rgba(207, 62, 90, 0.08);
+}
+
+.wl-nav-wrap {
+  gap: 0.8rem;
+  padding: 0.2rem 0.35rem;
+  border: 1px solid #f7d5db;
+  border-radius: 1rem;
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.wl-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: #1f2937;
+}
+
+.wl-brand span {
+  font-size: 1.5rem;
+}
+
+.wl-navbar .fa-compass {
+  color: #ff385c;
+  font-size: 1.45rem;
+  background: #ffe6eb;
+  border: 1px solid #ffcad5;
+  border-radius: 999px;
+  padding: 0.55rem;
+  box-shadow: 0 3px 10px rgba(255, 56, 92, 0.18);
+}
+
+.wl-nav-link {
+  color: #243447 !important;
+  font-weight: 500;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem !important;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.wl-nav-link:hover {
+  background-color: #ffeef2;
+  color: #b4233a !important;
+  border-color: #ffc8d3;
+}
+
+.wl-search-form {
+  width: min(680px, 100%);
+  margin: 0 auto;
+  background: #fffdfd;
+  border: 1px solid #f3c7cf;
+  border-radius: 999px;
+  overflow: hidden;
+  box-shadow: 0 3px 14px rgba(207, 62, 90, 0.08);
+}
+
+.wl-search-input {
+  border: none;
+  border-radius: 0;
+  padding: 0.8rem 1rem;
+  font-size: 0.95rem;
+  box-shadow: none !important;
+}
+
+.wl-search-btn {
+  border: none;
+  border-left: 1px solid #ffc2ce;
+  border-radius: 0;
+  background: linear-gradient(180deg, #ff4b6e 0%, #ff385c 100%);
+  color: #ffffff;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.15rem;
+}
+
+.wl-search-btn:hover {
+  background: linear-gradient(180deg, #f33d62 0%, #e53050 100%);
+  color: #ffffff;
+}
+
+.wl-pill-link {
+  border: 1px solid #f3c7cf;
+  background: #fff9fa;
+}
+
+.wl-nav-actions {
+  align-items: center;
+  gap: 0.2rem;
+}
+
+@media (max-width: 991.98px) {
+  .wl-search-form {
+    margin: 0.8rem 0;
+  }
+
+  .wl-nav-actions {
+    margin-top: 0.3rem;
+    align-items: flex-start;
+  }
+
+  .wl-brand span {
+    font-size: 1.25rem;
+  }
+}

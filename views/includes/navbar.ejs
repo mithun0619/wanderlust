@@ -1,40 +1,51 @@
-<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
+<nav class="navbar navbar-expand-lg sticky-top border-bottom wl-navbar">
+  <div class="container-fluid wl-nav-wrap">
+    <a class="navbar-brand wl-brand" href="/listings">
+      <i class="fa-solid fa-compass"></i>
+      <span>WanderLust</span>
+    </a>
+
     <button
       class="navbar-toggler"
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings" style="font-size: 1.2rem; font-weight: 600;">Explore</a>
+      <div class="navbar-nav me-lg-3">
+        <a class="nav-link wl-nav-link" href="/listings">Explore</a>
       </div>
-      <form class="d-flex" role="search" style="width: 70%; margin: 0 auto;">
+
+      <form class="d-flex wl-search-form" role="search" action="/listings" method="GET">
         <input
-          class="form-control me-2 rounded-start"
+          class="form-control wl-search-input"
           type="search"
+          name="q"
           placeholder="Search listings"
-          aria-label="Search"
-          style="font-size: 0.95rem; border-radius: 25px 0 0 25px;"
+          aria-label="Search listings"
         />
-        <button class="btn btn-danger rounded-end" type="submit" style="font-size: 0.9rem; border-radius: 0 25px 25px 0;"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+        <button class="btn wl-search-btn" type="submit">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span>Search</span>
+        </button>
       </form>
-    </div>
 
-
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">Airbnb you home</a>
+      <div class="navbar-nav ms-lg-auto wl-nav-actions">
+        <a class="nav-link wl-nav-link wl-pill-link" href="/listings/new">Add Your Listing</a>
         <% if(!currUser){ %>
-        <a class="nav-link" href="/signup"><b>Sign up</b></a>
-        <a class="nav-link" href="/login"><b>Login</b></a>
-        <%}%>
-         <% if(currUser){ %>
-        <a class="nav-link" href="/logout">Log out</a>
-     <%}%>
+        <a class="nav-link wl-nav-link" href="/signup"><b>Sign up</b></a>
+        <a class="nav-link wl-nav-link" href="/login"><b>Login</b></a>
+        <% } %>
+        <% if(currUser){ %>
+        <a class="nav-link wl-nav-link" href="/logout">Log out</a>
+        <% } %>
+      </div>
     </div>
   </div>
 </nav>
