@@ -4,7 +4,7 @@ body {
   min-height: 100vh;
 }
 
-.container {
+.page-container {
   flex: 1;
 }
 .navbar {
@@ -116,3 +116,4 @@ body {
   height: 400px;
   width: 80vh;
 }
+
