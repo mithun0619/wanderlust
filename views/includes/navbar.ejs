@@ -28,6 +28,7 @@
           type="search"
           name="q"
           placeholder="Search listings"
+          value="<%= typeof searchQuery !== 'undefined' ? searchQuery : '' %>"
           aria-label="Search listings"
         />
         <button class="btn wl-search-btn" type="submit">
