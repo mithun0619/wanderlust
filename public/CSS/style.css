@@ -259,6 +259,18 @@ footer {
   gap: 0.2rem;
 }
 
+.wl-mobile-explore {
+  display: inline-flex;
+  align-items: center;
+  color: #243447;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.wl-mobile-explore:hover {
+  color: #b4233a;
+}
+
 @media (max-width: 991.98px) {
   .wl-search-form {
     margin: 0.8rem 0;
@@ -269,8 +281,13 @@ footer {
     align-items: flex-start;
   }
 
-  .wl-brand span {
-    font-size: 1.25rem;
+  .wl-nav-wrap {
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .wl-mobile-explore {
+    margin-left: 0.1rem;
   }
 }
 

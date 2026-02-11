@@ -46,9 +46,39 @@
     }
 
     .tax-toggle {
-      margin-top: 1rem;
-      margin-left: 0.5rem;
-      white-space: nowrap;
+      display: none;
+    }
+
+    .mobile-tax-wrap {
+      margin-top: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .mobile-tax-card {
+      border: 2px solid #333;
+      border-radius: 999px;
+      padding: 0.8rem 1rem;
+      background-color: #fbfafa;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .mobile-tax-card label {
+      margin: 0;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: #0f172a;
+    }
+
+    .mobile-tax-card .form-check-input {
+      width: 2.5rem;
+      height: 1.35rem;
+      margin: 0;
+      cursor: pointer;
     }
   }
 
@@ -120,9 +150,15 @@
 
   <div class="tax-toggle">
     <div class="form-check-reverse form-switch">
-  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <input class="form-check-input tax-switch" type="checkbox" role="switch" id="switchCheckDefault">
   <label class="form-check-label" for="switchCheckDefault"><b>Display total after taxes</b></label>
 </div>
+  </div>
+</div>
+<div class="mobile-tax-wrap d-md-none">
+  <div class="mobile-tax-card">
+    <label for="switchCheckDefaultMobile">Display total after taxes</label>
+    <input class="form-check-input tax-switch" type="checkbox" role="switch" id="switchCheckDefaultMobile">
   </div>
 </div>
   <% if (allListing.length === 0) { %>
@@ -151,29 +187,40 @@
   <% } %>
 
 
-    <script>
+        <script>
       // Category Filter Click Events
       document.querySelectorAll(".filter").forEach((filter) => {
-        filter.addEventListener("click", function() {
+        filter.addEventListener("click", function () {
           const category = this.getAttribute("data-category");
           window.location.href = `/listings/category/${category}`;
         });
       });
 
-      let taxswitch = document.getElementById("switchCheckDefault");
-      taxswitch.addEventListener("change", function() {
-        let priceElements = document.querySelectorAll(".listing-card .card-text");
-        priceElements.forEach(function(element) {
-          let originalPrice = parseInt(element.getAttribute("data-original-price"));
-          let b = element.querySelector("b");
-          let title = b.textContent;
-          if (taxswitch.checked) {
-            let totalPrice = Math.round(originalPrice * 1.18);
-            element.innerHTML = `<b>${title}</b><br />₹ ${totalPrice.toLocaleString("en-IN")} / night (incl. taxes)`;
+      function updatePrices(showWithTax) {
+        const priceElements = document.querySelectorAll(".listing-card .card-text");
+        priceElements.forEach((element) => {
+          const originalPrice = parseInt(element.getAttribute("data-original-price"), 10);
+          const b = element.querySelector("b");
+          const title = b ? b.textContent : "";
+          if (showWithTax) {
+            const totalPrice = Math.round(originalPrice * 1.18);
+            element.innerHTML = `<b>${title}</b><br />&#x20B9; ${totalPrice.toLocaleString("en-IN")} / night (incl. taxes)`;
           } else {
-            element.innerHTML = `<b>${title}</b><br />₹ ${originalPrice.toLocaleString("en-IN")} / night`;
+            element.innerHTML = `<b>${title}</b><br />&#x20B9; ${originalPrice.toLocaleString("en-IN")} / night`;
           }
           element.setAttribute("data-original-price", originalPrice);
-        }); 
+        });
+      }
+
+      const taxSwitches = document.querySelectorAll(".tax-switch");
+      taxSwitches.forEach((taxSwitch) => {
+        taxSwitch.addEventListener("change", function () {
+          const checked = this.checked;
+          taxSwitches.forEach((siblingSwitch) => {
+            siblingSwitch.checked = checked;
+          });
+          updatePrices(checked);
+        });
       });
     </script>
+
