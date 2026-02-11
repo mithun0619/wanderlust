@@ -1,0 +1,155 @@
+<% layout("/layouts/boilerplate") %>
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.8;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  filter p {
+    font-size: 0.8rem;
+  }
+
+  .tax-toggle {
+    margin-left: auto;
+    margin-top: 2rem;
+    border: 2px solid #333;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    background-color: #fbfafa;
+  }
+
+
+</style>
+  <!-- <h1>ALL Listings</h1> -->
+  <!--<form method="GET" action="/listings/new">
+        <button>Add New Listing</button>
+    </form>-->
+<div id="filters">
+  <div class="filter" data-category="Trending">
+    <div><i class="fa-solid fa-fire"></i></div>
+    <p>Trending</p>
+  </div>
+
+  <div class="filter" data-category="Rooms">
+    <div><i class="fa-solid fa-bed"></i></div>
+    <p>Rooms</p>
+  </div>
+
+
+    <div class="filter" data-category="Iconic Cities">
+    <div><i class="fa-solid fa-mountain-city"></i></div>
+    <p>Iconic Cities</p>
+  </div>
+
+  <div class="filter" data-category="Mountains">
+    <div><i class="fa-solid fa-mountain"></i></div>
+    <p>Mountains</p>
+  </div>
+
+
+
+    <div class="filter" data-category="Castles">
+    <div><i class="fa-brands fa-fort-awesome"></i></div>
+    <p>Castles</p>
+  </div>
+
+  <div class="filter" data-category="Amazing Pools">
+    <div><i class="fa-solid fa-person-swimming"></i></div>
+    <p>Amazing Pools</p>
+  </div>
+
+
+   <div class="filter" data-category="Camping">
+    <div><i class="fa-solid fa-campground"></i></div>
+    <p>Camping</p>
+  </div>
+
+  <div class="filter" data-category="Farms">
+    <div><i class="fa-solid fa-cow"></i></div>
+    <p>Farms</p>
+  </div>
+
+  <div class="filter" data-category="Arctic">
+    <div><i class="fa-solid fa-snowflake"></i></div>
+    <p>Arctic</p>
+  </div>
+
+  <div class="filter" data-category="Domes">
+    <div><i class="fa-solid fa-gopuram"></i></div>
+    <p>Domes</p>
+  </div>
+
+  <div class="filter" data-category="Boat">
+    <div><i class="fa-solid fa-water"></i></div>
+    <p>Boat</p>
+  </div>
+
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+  <label class="form-check-label" for="switchCheckDefault"><b>Display total after taxes</b></label>
+</div>
+  </div>
+</div>
+  <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+     <% for(let listing of allListing){%>
+        <a href="/listings/<%=listing._id%>" class="listing-link">
+     <div class="card col listing-card" >
+      <img src="<%=listing.image.url%>" class="card-img-top" alt="listing-image" style="height: 20rem" />
+      <div class="card-img-overlay"></div>
+
+
+      <div class="card-body">
+        <p class="card-text" data-original-price="<%=listing.price%>">
+          <b><%=listing.title%></b>
+          <br />
+          &#x20B9; <%=listing.price.toLocaleString("en-IN")%> / night
+
+        </p>
+      </div>
+        </div>
+        </a>
+      <%}%>
+      
+    </div>
+
+
+    <script>
+      // Category Filter Click Events
+      document.querySelectorAll(".filter").forEach((filter) => {
+        filter.addEventListener("click", function() {
+          const category = this.getAttribute("data-category");
+          window.location.href = `/listings/category/${category}`;
+        });
+      });
+
+      let taxswitch = document.getElementById("switchCheckDefault");
+      taxswitch.addEventListener("change", function() {
+        let priceElements = document.querySelectorAll(".listing-card .card-text");
+        priceElements.forEach(function(element) {
+          let originalPrice = parseInt(element.getAttribute("data-original-price"));
+          let b = element.querySelector("b");
+          let title = b.textContent;
+          if (taxswitch.checked) {
+            let totalPrice = Math.round(originalPrice * 1.18);
+            element.innerHTML = `<b>${title}</b><br />₹ ${totalPrice.toLocaleString("en-IN")} / night (incl. taxes)`;
+          } else {
+            element.innerHTML = `<b>${title}</b><br />₹ ${originalPrice.toLocaleString("en-IN")} / night`;
+          }
+          element.setAttribute("data-original-price", originalPrice);
+        }); 
+      });
+    </script>
